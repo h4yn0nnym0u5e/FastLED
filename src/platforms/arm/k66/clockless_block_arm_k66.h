@@ -36,11 +36,13 @@ public:
 
 	virtual void showPixels(PixelController<RGB_ORDER, LANES, LANE_MASK> & pixels) { 
 		mWait.wait();
-		uint32_t clocks = showRGBInternal(pixels);
 		#if FASTLED_ALLOW_INTERRUPTS == 0
+		uint32_t clocks = showRGBInternal(pixels);
 		// Adjust the timer
 		long microsTaken = CLKS_TO_MICROS(clocks);
 		MS_COUNTER += (1 + (microsTaken / 1000));
+		#else
+		showRGBInternal(pixels);
 		#endif
 
 		mWait.mark();
@@ -243,11 +245,13 @@ public:
 
 	virtual void showPixels(PixelController<RGB_ORDER, LANES, PMASK> & pixels) { 
 		mWait.wait();
-		uint32_t clocks = showRGBInternal(pixels);
 	#if FASTLED_ALLOW_INTERRUPTS == 0
+		uint32_t clocks = showRGBInternal(pixels);
 		// Adjust the timer
 		long microsTaken = CLKS_TO_MICROS(clocks);
 		MS_COUNTER += (1 + (microsTaken / 1000));
+	#else
+		showRGBInternal(pixels);
 	#endif
 
 		mWait.mark();
