@@ -39,6 +39,7 @@ public:
         pserial->show();
     }
 
+    bool busy(void) { return pserial->busy(); }
 };
 
 FASTLED_NAMESPACE_END

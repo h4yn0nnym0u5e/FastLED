@@ -80,6 +80,9 @@ public:
         show(data, nLeds, getAdjustment(brightness));
     }
 
+    /// return true if non-blocking controller is busy
+    virtual bool busy(void) { return false; }
+
     /// show function w/integer brightness, will scale for color correction and temperature
     void showColor(const struct CRGB &data, int nLeds, uint8_t brightness) {
         showColor(data, nLeds, getAdjustment(brightness));
